@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>轮播图</title>
+</head>
+
+<style>
+    *,
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    #all {
+        position: relative;
+        margin: 100px auto;
+        width: 800px;
+        height: 300px;
+    }
+
+    .box {
+        position: relative;
+        width: 800px;
+        height: 300px;
+        overflow: hidden;
+    }
+
+    .box ul {
+        width: 1000%;
+        list-style: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .box ul li {
+        float: left;
+    }
+
+    .box ul li img {
+        width: 800px;
+        height: 300px;
+    }
+    .box ol{
+        position: absolute;
+        right:30px;
+        bottom:20px;
+    }
+    .box ol li{
+        width: 15px;
+        display: inline-block;
+        height: 15px;
+        margin: 0 3px;
+        cursor: pointer;
+        line-height: 15px;
+        text-align: center;
+        background-color: #fff;
+    }
+    .box ol .current{
+        background-color:orange;
+        color:red;
+    }
+    .btn{
+        position: absolute;
+        left:0;
+        top:50%;
+        width:800px;
+        height:30px;
+        padding:0 10px;
+        box-sizing: border-box;
+        display: none;
+    }
+    .btn span{
+        display: inline-block;
+        width:25px;
+        height:30px;
+        line-height: 30px;
+        font-size: 24px;
+        color:black;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.9);
+        cursor: pointer;
+
+    }
+    #left {
+      float: left;
+    }
+ 
+    #right {
+      float: right;
+    }
+</style>
+
+<body>
+    <div id="all">
+        <div class="box">
+            <ul>
+                <li><img src="./1.jpg" alt=""></li>
+                <li><img src="./2.jpg" alt=""></li>
+                <li><img src="./3.jpg" alt=""></li>
+                <li><img src="./4.jpg" alt=""></li>
+            </ul>
+            <ol>
+
+            </ol>
+        </div>
+        <div class="btn" id="btn">
+            <span id="left"><</span>
+            <span id="right">></span>
+        </div>
+    </div>
+</body>
+<script src="./index.js"></script>
+</html>
