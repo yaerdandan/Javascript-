@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Web播放器</title>
+    <link rel="stylesheet" href="./css/iconfont.css">
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+            window.addEventListener("orienttationchange", setRem());
+            window.addEventListener("resize", setRem());
+            function setRem() {
+                var html = document.querySelector("html");
+                var width = html.getBoundingClientRect().width;
+                html.style.fontSize = width / 16 + "px";
+            }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+
+        html,
+        body {
+            height: 100%;
+            background: rgb(155, 161, 167);
+        }
+
+        #box {
+            height: 100%;
+            position: relative;
+        }
+
+        .picture {
+            width: 7rem;
+            height: 7rem;
+            position: relative;
+            transition: 40s linear;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .pic {
+            width: 7rem;
+            height: 7rem;
+            border-radius: 7rem;
+            display: block;
+        }
+        .detail{
+            width:10rem;
+            height:3rem;
+            margin: 0 auto;
+        }
+        .detail .songName{
+            padding-top:.25rem;
+            display: block;
+            font-size: .7rem;
+            font-weight: 600;
+            text-align: center;
+        }
+        .detail .singer{
+            padding-top:.3rem;
+            display: block;
+            font-size: .56rem;
+            font-weight: 500;
+            text-align: center;
+        }
+        #boxx {
+            position: absolute;
+            height:10rem;
+            left: 0;
+            top: 11rem;
+            width: 100%;
+            overflow: hidden;
+        }
+        .lrc {
+            width: 100%;
+            font-size: .6rem;
+            text-align: center;
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+        }
+
+        #text {
+            width: 100%;
+            font-size: .6rem;
+            text-align: center;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        #text li {
+            line-height: 1.2rem;
+            font-size: .65rem;
+        }
+
+        .lineheight {
+            color: red;
+        }
+
+        .controller {
+            width: 100%;
+            height: 4rem;
+            position: absolute;
+            bottom: 2rem;
+        }
+
+        .audio {
+            width: 100%;
+            height: 3rem;
+        }
+
+        .kzq {
+            width: 100%;
+            height: 2rem;
+            position: absolute;
+            bottom: 4rem;
+        }
+
+        .volume {
+            width: 10rem;
+            position: absolute;
+            left: 1.8rem;
+            top: -.3rem;
+        }
+
+        .volueProgress {
+            width: 9rem;
+            height: .5rem;
+            position: relative;
+            top: -.8rem;
+            left: 1.2rem;
+        }
+
+        .volumeProcess {
+            width: 8rem;
+            height: .2rem;
+            line-height: .5rem;
+            background: #bcbcc2;
+        }
+
+        .volumeProcessNow {
+            width: 8rem;
+            height: .2rem;
+            line-height: .5rem;
+            background: red;
+            position: relative;
+            top: -.2rem;
+            
+        }
+        .yinliang{
+            font-size:1.1rem;
+            font-weight: bold;
+        }
+        .volumeAnniu {
+            float: right;
+            position: relative;
+            top:-.62rem;
+            right:.62rem;
+        }
+        .kzq .playbtn {
+            width: 1.8rem;
+            height: 2rem;
+            position: relative;
+            top: 2.5rem;
+            margin: 0 auto;
+            z-index: 1;
+        }
+
+        .icon-bofang1,
+        .icon-bofang {
+            display: block;
+            text-align: center;
+            position: relative;
+            top: .2rem;
+            font-size: 1.666667rem;
+        }
+
+        .icon-ai10 {
+            font-size: 1.4rem;
+            position: absolute;
+            top: .4rem;
+            left: -3rem;
+        }
+
+        .icon-ai09 {
+            font-size: 1.4rem;
+            position: absolute;
+            top: .4rem;
+            right: -3rem;
+        }
+
+        .process {
+            width: 100%;
+            height: 2rem;
+            position: relative;
+            top: -.2rem;
+        }
+
+        .processAll {
+            width: 12rem;
+            float: left;
+            position: relative;
+            left: 2.1rem;
+            height: .2rem;
+            cursor: pointer;
+            background-color: #171719;
+        }
+
+        .processNow {
+            width: 0px;
+            max-width: 12rem;
+            position: relative;
+            left: 2.1rem;
+            height: .2rem;
+            cursor: pointer;
+            background-color: red;
+        }
+
+        .startTime {
+            position: absolute;
+            top: -.4rem;
+            left: .1rem;
+            font-size: .7rem;
+        }
+
+        .endTime {
+            position: absolute;
+            top: -.4rem;
+            right: 0;
+            font-size: .7rem;
+        }
+
+        .processbtn {
+            position: absolute;
+            top: -.25rem;
+            margin-left: 1.8rem;
+        }
+
+        .random {
+            color: #36366F;
+            font-size: .8rem;
+            font-weight: bold;
+            float: right;
+            position: relative;
+            top: -1rem;
+            right: 1rem;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="box">
+         <div class="detail">
+                    <span class="songName"></span>
+                    <span  class="singer"></span>
+                </div>
+        <div class="picture">
+        </div>
+        
+       
+        <div id="boxx">
+            <div class="lrc">
+            </div>
+            <div id="text">
+
+            </div>
+        </div>
+
+        <div class="controller">
+        </div>
+
+        <div class="kzq">
+            <div class="volume">
+                <span class="iconfont icon-yinliang yinliang"></span>
+                <div class="volueProgress">
+                    <div class="volumeProcess"></div>
+                    <div class="volumeProcessNow"></div>
+                    <span class="iconfont icon-anniu volumeAnniu"></span>
+                </div>
+
+            </div>
+            <div class="playbtn" id="playbtn">
+                <span class="iconfont icon-bofang"></span>
+                <span class="iconfont icon-ai10" onclick="lastMusic()"></span>
+                <span class="iconfont icon-ai09" onclick="random()"></span>
+            </div>
+            <div class="process">
+                <span class="startTime"></span>
+                <div class="processAll"></div>
+                <div class="processNow"></div>
+                <span class="endTime"></span>
+                <span class="iconfont icon-xuanzeanniu processbtn"></span>
+            </div>
+
+        </div>
+    </div>
+</body>
+<script>
+    $(document).ready(function () {
+        var param = GetRequest();
+        $.ajax({
+            type: "GET",
+            url: "https://api.bzqll.com/music/netease/song?key=579621905&id=" + param['id'] + "",
+            success: function (res) {
+                console.log(res.data);
+                $(".picture").html(
+                    "<img class='pic' src=" + res.data.pic + "/>"
+                );
+                $(".controller").html(
+                    "<audio src=" + res.data.url +
+                    "  id='myaudio' controls autoplay hidden='true' type='audio/mpeg'></audio>"
+                );
+                $(".songName").html(res.data.name);
+                $(".singer").html(res.data.singer);
+                ppt();
+                audio();
+                $.ajax({
+                    type: "GET",
+                    url: res.data.lrc,
+                    dataType: "text",
+                    success: function (res) {
+                        var arr = res.split(/\r\n|\n/g);
+                        for (var i = 0; i < arr.length; i++) {
+                            arr[i] = "<p>" + arr[i] + "</p>";
+                        }
+                        $(".lrc").html(
+                            arr
+                        );
+                        lyric();
+                    }
+                });
+            }
+        });
+    })
+    //获取url参数
+    function GetRequest() {
+        var url = location.search; //获取url中"?"符后的字串  
+        var theRequest = new Object();
+        if (url.indexOf("?") != -1) {
+            var str = url.substr(1);
+            strs = str.split("&");
+            for (var i = 0; i < strs.length; i++) {
+                theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+            }
+        }
+        return theRequest;
+    }
+    //图片的旋转
+    var timer;
+
+    function ppt() {
+        clearInterval(timer);
+        var deg = 0;
+        var picture = document.querySelector(".picture");
+        timer = setInterval(function () {
+            deg++;
+            picture.style.transiton = "40s linear";
+            picture.style.transform = "rotate(" + deg + "deg)";
+        }, 60)
+    }
+    //点击进度条控制音频播放
+    function audio() {
+        myaudio = document.getElementById("myaudio");
+        var playbtn = document.getElementById("playbtn");
+        var processAll = document.querySelector(".processAll");
+        var processNow = document.querySelector(".processNow");
+        var processbtn = document.querySelector(".processbtn");
+        changeProcess();
+        volume();
+        playbtn.onclick = function () {
+            if (myaudio.paused) {
+                playbtn.children[0].className = "iconfont icon-bofang";
+                myaudio.play();
+            } else {
+                playbtn.children[0].className = "iconfont icon-bofang1";
+                myaudio.pause();
+
+            }
+        }
+        //自动更新进度条
+        setInterval(process, 1000);
+
+        function process() {
+            var widthChange = (myaudio.currentTime / myaudio.duration) * processAll.offsetWidth;
+            processNow.style.width = widthChange + "px";
+            processbtn.style.left = widthChange + "px";
+            //获取已经播放的时间
+            var currentTime = setTime(myaudio.currentTime);
+            //获取总时长
+            var timeAll = setTime(myaudio.duration);
+            document.querySelector(".startTime").innerHTML = currentTime;
+            document.querySelector(".endTime").innerHTML = timeAll;
+        }
+        //设置时间
+        function setTime(number) {
+            var minute = parseInt(number / 60);
+            var second = parseInt(number % 60);
+            minute = minute >= 10 ? minute : "0" + minute;
+            second = second >= 10 ? second : "0" + second;
+            return minute + ":" + second;
+        }
+        //控制音频播放
+        function changeProcess() {
+            processbtn.addEventListener(
+                "touchmove",
+                function (e) {
+                    myaudio.pause();
+                    //获取点击的X轴坐标位置
+                    var endX = e.changedTouches[0].pageX;
+                    //获取元素到左边的距离
+                    var width = processAll.offsetLeft;
+                    //获取差值
+                    var dis = endX - width;
+                    if (dis < 0) {
+                        dis = 0;
+                    }
+                    if (dis > processAll.offsetWidth) {
+                        dis = processAll.offsetWidth
+                    }
+                    processbtn.style.left = dis + "px";
+                    processNow.style.width = dis + "px";
+                    //获取到跳转的时间
+                    var place = (dis / processAll.offsetWidth) * myaudio.duration;
+                    myaudio.currentTime = place;
+                }
+            );
+            processbtn.addEventListener(
+                "touchend",
+                function (e) {
+                    if (playbtn.children[0].className == "iconfont icon-bofang1") {
+                        myaudio.pause();
+                    } else {
+                        myaudio.play();
+                    }
+                    BtnProcessLine();
+                }
+            );
+            processAll.addEventListener(
+                "touchend",
+                function (e) {
+                    //获取点击的X轴坐标位置
+                    var endX = e.changedTouches[0].pageX;
+                    //获取元素到左边的距离
+                    var width = processAll.offsetLeft;
+                    //获取差值
+                    var dis = endX - width;
+                    processbtn.style.left = dis + "px";
+                    processNow.style.width = dis + "px";
+                    //获取到跳转的时间
+                    var place = (dis / processAll.offsetWidth) * myaudio.duration;
+                    myaudio.currentTime = place;
+                    BtnProcessLine();
+                }
+            );
+            processNow.addEventListener(
+                "touchend",
+                function (e) {
+                    //获取点击的X轴坐标位置
+                    var endX = e.changedTouches[0].pageX;
+                    //获取元素到左边的距离
+                    var width = processAll.offsetLeft;
+                    //获取差值
+                    var dis = endX - width;
+                    processbtn.style.left = dis + "px";
+                    processNow.style.width = dis + "px";
+                    //获取到跳转的时间
+                    var place = (dis / processAll.offsetWidth) * myaudio.duration;
+                    myaudio.currentTime = place;
+                    BtnProcessLine();
+                }
+            )
+        }
+        //点击进度条切换歌词的进度及高亮
+        function BtnProcessLine() {
+
+            for (var j = 0; j < lrcArray.length; j++) {
+                $($("#text").find("li").get(j)).removeClass("lineheight");
+            }
+            for (var i = 0; i < lrcArray.length; i++) {
+                if (parseFloat(lrcArray[i].t) <= myaudio.currentTime.toFixed(3) && parseFloat(lrcArray[i + 1].t) >=
+                    myaudio.currentTime.toFixed(3)) {
+                    line = i;
+                    $($("#text").find("li").get(i)).addClass("lineheight");
+                }
+            }
+        }
+        //控制音量的大小
+        function volume() {
+            var volumeProcess = document.querySelector(".volumeProcess");
+            var volumeProcessNow = document.querySelector(".volumeProcessNow");
+            var volume = document.querySelector(".volume");
+            var volumeAnniu = document.querySelector(".volumeAnniu")
+            // console.log(myaudio.volume);
+            // var place = myaudio.volume/1*volumeProcess.offsetWidth;
+            // volumeProcessNow.style.width = place + "px";
+            volumeProcess.addEventListener(
+                "touchend",
+                function (e) {
+                    var startX = e.changedTouches[0].pageX;
+                    var leftX = volume.children[0].offsetWidth + volume.offsetLeft;
+                    var dis = startX - leftX;
+                    var volumeNum = dis / volumeProcess.offsetWidth * 1;
+                    if (volumeNum > 1) {
+                        volumeNum = 1;
+                        dis = volumeProcess.offsetWidth;
+                    }
+                    if (volumeNum < 0) {
+                        volumeNum = 0;
+                    }
+                    myaudio.volume = volumeNum;
+                    volumeAnniu.style.width =volumeProcess.offsetWidth-dis+16+"px";
+                    volumeProcessNow.style.width = dis + "px";
+                });
+            volumeAnniu.addEventListener(
+                "touchmove",
+                function (e) {
+                    var startX = e.changedTouches[0].pageX;
+                    var leftX = volume.children[0].offsetWidth + volume.offsetLeft;
+                    var dis = startX - leftX;
+                    var volumeNum = dis / volumeProcess.offsetWidth * 1;
+                    if (volumeNum > 1) {
+                        volumeNum = 1;
+                        dis = volumeProcess.offsetWidth;
+                    }
+                    if (volumeNum < 0) {
+                        volumeNum = 0;
+                    }
+                    myaudio.volume = volumeNum;
+                    volumeAnniu.style.width =volumeProcess.offsetWidth-dis+16+"px";
+                    volumeProcessNow.style.width = dis + "px";
+                });
+            volumeAnniu.addEventListener(
+                "touchend",
+                function (e) {
+                    var startX = e.changedTouches[0].pageX;
+                    var leftX = volume.children[0].offsetWidth + volume.offsetLeft;
+                    var dis = startX - leftX;
+                    var volumeNum = dis / volumeProcess.offsetWidth * 1;
+                    if (volumeNum > 1) {
+                        volumeNum = 1;
+                        dis = volumeProcess.offsetWidth;
+                    }
+                    if (volumeNum < 0) {
+                        volumeNum = 0;
+                    }
+                    myaudio.volume = volumeNum;
+                    volumeAnniu.style.width =volumeProcess.offsetWidth-dis+16+"px";
+                    volumeProcessNow.style.width = dis + "px";
+                });
+            volumeProcessNow.addEventListener(
+                "touchend",
+                function (e) {
+                    var startX = e.changedTouches[0].pageX;
+                    var leftX = volume.children[0].offsetWidth + volume.offsetLeft;
+                    var dis = startX - leftX;
+                    var volumeNum = dis / volumeProcess.offsetWidth * 1;
+                    if (volumeNum > 1) {
+                        volumeNum = 1;
+                        dis = volumeProcess.offsetWidth;
+                    }
+                    if (volumeNum < 0) {
+                        volumeNum = 0;
+                    }
+                    myaudio.volume = volumeNum;
+                    volumeAnniu.style.width =volumeProcess.offsetWidth-dis+16+"px";
+                    volumeProcessNow.style.width = dis + "px";
+                });
+        }
+    }
+    //歌词数组
+    var lrcArray = new Array();
+    //歌词高亮的行数
+    var line = 0;
+    //歌词的滚动
+    function lyric() {
+        var text = document.querySelector("#text");
+        var boxx = document.querySelector("#boxx");
+        var startY = 0;
+        var lrcHeight = 0;
+
+        auto();
+        createLrc();
+
+        function createLrc() {
+            var medis = document.querySelector(".lrc").innerText;
+            var medises = medis.split("\n");
+            for (var i = 0; i < medises.length; i++) {
+                if (medises[i] == "") {
+                    medises.splice(i, 1)
+                }
+            }
+            $.each(medises, function (i, item) {
+                var t = item.substring(item.indexOf("[") + 1, item.indexOf("]"));
+                lrcArray.push({
+                    t: (t.split(":")[0] * 60 + parseFloat(t.split(":")[1])).toFixed(3),
+                    c: item.substring(item.indexOf("]") + 1, item.length)
+                });
+            });
+            for (var i = 0; i < lrcArray.length; i++) {
+                if (lrcArray[i].c == "") {
+                    lrcArray.splice(i, 1)
+                }
+            }
+            var ul = $("#text");
+            $.each(lrcArray, function (i, item) {
+                if (item.c != "") {
+                    var li = $("<li style='list-style: none;'>");
+                    li.html(item.c);
+                    ul.append(li);
+                }
+            });
+            //点击一行歌词自动切换播放时间及高亮
+            var li = text.children;
+            for (var i = 0; i < li.length; i++) {
+                (function (num) {
+                    li[i].onclick = function () {
+                        for (var j = 0; j < lrcArray.length; j++) {
+                            $($("#text").find("li").get(j)).removeClass("lineheight");
+                        }
+                        $($("#text").find("li").get(num)).addClass("lineheight");
+                        line = num;
+                        myaudio.currentTime = lrcArray[num].t;
+                    }
+                })(i)
+            }
+        }
+
+        var maxTop = boxx.clientHeight - text.offsetHeight;
+        text.addEventListener(
+            "touchstart",
+            function (e) {
+                startY = e.changedTouches[0].pageY;
+                lrcHeight = text.offsetTop;
+            }
+        );
+        text.addEventListener(
+            "touchmove",
+            function (e) {
+                var nowY = e.changedTouches[0].pageY;
+                var dis = nowY - startY;
+                var top = lrcHeight + dis;
+                if (top > 0) {
+                    top = 0;
+                }
+                if (top < maxTop) {
+                    top = maxTop;
+                }
+                text.style.top = top + "px";
+            }
+        );
+        text.addEventListener(
+            "touchend",
+            function (e) {
+                var startY = e.changedTouches[0].pageY;
+            }
+        );
+        //歌词自动向下轮播
+        function auto() {
+            var top = 0;
+            myaudio.addEventListener(
+                "timeupdate",
+                function () {
+                    if (myaudio.ended) {
+                        random();
+                    }
+                    for (var j = 0; j < lrcArray.length; j++) {
+                        $($("#text").find("li").get(j)).removeClass("lineheight");
+                    }
+                    for (var i = 0; i < lrcArray.length; i++) {
+                        if (parseFloat(lrcArray[i].t) <= myaudio.currentTime.toFixed(3) && parseFloat(lrcArray[i + 1].t) >=
+                            myaudio.currentTime.toFixed(3)) {
+                            line = i;
+                            $($("#text").find("li").get(i)).addClass("lineheight");
+                            lineBright(line);
+                        }
+                    }
+                }
+            );
+
+            function lineBright(line) {
+                $($("#text").find("li").get(line))
+                if (line >= 0) {
+                    $($("#text").find("li").get(line - 1)).removeClass("lineheight")
+                }
+                $($("#text").find("li").get(line)).addClass("lineheight");
+                var scrollTop = text.children[0].offsetHeight;
+                for (var i = 0; i <= lrcArray.length - 1; i++) {
+                    if (line == i) {
+                        top = scrollTop * i;
+                    }
+                }
+                text.style.top = -top + "px";
+            }
+        }
+    }
+    //下一个随机音乐
+    function random() {
+        var param = GetRequest();
+        sessionStorage.setItem('lastID', param['id']);
+        $.ajax({
+            type: "GET",
+            url: "https://api.bzqll.com/music/netease/songList?key=579621905&id=3778678&limit=10&offset=0",
+            success: function (res) {
+                var res = res.data.songs;
+                var random = parseInt(Math.random() * 200);
+                var data = res[random].id;
+                location.search = "?id=" + data + "";
+            }
+        })
+    }
+    //上一个音乐
+    function lastMusic() {
+        var id = sessionStorage.getItem('lastID');
+        console.log(id);
+        var param = GetRequest();
+        if (id == null) {
+            id = param['id'];
+        }
+        location.search = "?id=" + id + "";
+    }
+    //转换秒
+    // function timeToSec(time) {
+    //     var s = "";
+    //     var hour = time.split(":")[0];
+    //     var min = time.split(":")[1];
+    //     var sec = time.split(":")[2];
+    //     s = Number(hour*3600) + Number(min*60) + Number(sec);
+    //     return s;
+    // }
+</script>
+
+</html>
