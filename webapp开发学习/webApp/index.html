@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/index.css">
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script>
+
+        window.addEventListener("orienttationchange", setRem());
+        window.addEventListener("resize", setRem());
+
+        function setRem() {
+            var html = document.querySelector("html");
+            var width = html.getBoundingClientRect().width;
+            html.style.fontSize = width / 16 + "px";
+        }
+</script>
+
+</head>
+<body>
+    <section class="wrap">
+        <header id="header">
+            <div class="headerC">
+                <h1 id="logo">
+                    <a href="#">
+                        <img src="img/logo_new.png" />
+                    </a>
+                </h1>
+                <a href="javascript:;" id="menuBtn" class="menuBtnClose"></a>
+                <nav id="btns">
+                    <a href="#" class="searchBtn">搜索</a>
+                    <a href="#">登录</a>
+                </nav>
+            </div>
+            <from class="search">
+                <input type="text" placeholder="输入要搜索的内容">
+                <input type="submit" value="搜索" />
+            </from>
+            <ul id="nav">
+                <li>
+                    <a href="javascript:void(0);" class="" data-tab="index">首页</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" data-tab="mv" class="">MV</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" data-tab="pl" class="">悦单</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" data-tab="vchart" class="">V榜</a>
+                </li>
+                <li><a href="http://zhongchou.yinyuetai.com/wap" class="">众筹</a></li>
+                <li>
+                    <a href="http://www.yinyuetai.com/fanMass" data-tab="wapfan" class="">饭团</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" data-tab="program" class="">节目</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" data-tab="stage" class="">音悦stage</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" data-tab="apps/mobile" class="">APP下载</a>
+                </li>
+                <li>
+                    <a href="http://news.yinyuetai.com/" target="_blank" class="">资讯</a>
+                </li>
+                <li>
+                    <a href="http://i.yinyuetai.com" target="_blank" class="selected">我的家</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" data-tab="apps" class="">热门应用</a>
+                </li>
+            </ul>
+        </header>
+        <div class="content">
+                <nav id="navScroll">
+                    <ul id="navs">
+                        <li class="active">
+                            <a href="javascript:void(0);" class="" data-tab="index">首页</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" data-tab="mv" class="">MV</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" data-tab="pl" class="">悦单</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" data-tab="vchart" class="">V榜</a>
+                        </li>
+                        <li><a href="http://zhongchou.yinyuetai.com/wap" class="">众筹</a></li>
+                        <li>
+                            <a href="http://www.yinyuetai.com/fanMass" data-tab="wapfan" class="">饭团</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" data-tab="program" class="">节目</a>
+                        </li><li>
+                            <a href="javascript:void(0);" data-tab="program" class="">节目</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" data-tab="stage" class="">音悦stage</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" data-tab="apps/mobile" class="">APP下载</a>
+                        </li>
+                        <li>
+                            <a href="http://news.yinyuetai.com/" target="_blank" class="">资讯</a>
+                        </li>
+                        <li>
+                            <a href="http://i.yinyuetai.com" target="_blank" class="selected">我的家</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" data-tab="apps" class="">热门应用</a>
+                        </li>
+                    </ul>
+                </nav>
+                <div id="picTab">
+                    <ul id="picList">
+                        <li>
+                            <a href="#">
+                                <img src="img/img1.jpg" />
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <img src="img/img2.jpg" />
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <img src="img/img3.jpg" />
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <img src="img/img4.jpg" />
+                            </a>
+                        </li>
+        
+                    </ul>
+                    <nav id="picNav">
+                        <span class="active"></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </nav>
+                </div>
+                <section class="tab">
+                    <header class="tabHeader">
+                        <h2>热门音乐</h2>
+                        <a href="#">更多></a>
+                    </header>
+                    <nav class="tabNav">
+                        <a href="javascript:;" class="J_area cur" data-area="all">全部</a>
+                        <a href="javascript:;" class="J_area" data-area="ml">内地</a>
+                        <a href="javascript:;" class="J_area" data-area="ht">港台</a>
+                        <a href="javascript:;" class="J_area" data-area="us">欧美</a>
+                        <a href="javascript:;" class="J_area" data-area="kr">韩国</a>
+                        <a href="javascript:;" class="J_area" data-area="jp">日本</a>
+                        <span></span>
+                    </nav>
+                    <section class="tabList">
+                        <ul class="tabNext">
+                            loading
+                        </ul>
+                        <ul class="tabShow">
+                        </ul>
+                        <ul class="tabNext">
+                            loading
+                        </ul>
+                    </section>
+                </section>
+            </div>
+    </section>
+</body>
+<script src="./js/transform.js"></script>
+<script src="./js/index.js"></script>
+<script>
+$(document).ready(function () {
+    var tabShow = document.querySelector(".tabShow");
+    $.ajax({
+        type: "GET",
+        url: "https://api.bzqll.com/music/netease/songList?key=579621905&id=3778678&limit=10&offset=0",
+        success: function (res) {
+            var data = res.data.songs;
+            console.log(data[0])
+            for (var i = 0; i < 6; i++) {
+                tabShow.innerHTML += "<li><a href=details.html?id=" + data[i]["id"] + "><img src=" + data[i]["pic"] + "><span>" + data[i]["name"] + "</span></a></li>";
+            }
+        }
+    })
+})
+</script>
+</html>
